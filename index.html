@@ -1,11 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lissajous</title>
+  <title>Lissajous Machine</title>
+  <script src="fixedQueue.js"></script>
+  <script src="graph.js"></script>
+  <script src="lissajous.js"></script>
+
+  <style>
+    body { background: black; color: white; }
+    body > section { display: flex; justify-content: center; }
+
+    textarea { min-width: 40em; background: #222; color: white; border: none; padding: 1em; }
+
+    #oscilloscope, textarea { margin: 0 1em; }
+
+    #oscilloscope { position: relative; }
+    #oscilloscope img { width: 90%;
+      -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; pointer-events: none; -webkit-user-drag: none; user-drag: none;
+    }
+
+    h1 { position: absolute; top: -0.3em; left: 14%;
+           font: 16px bold "Times New Roman" serif; color: #3b2a61; font-style: italic; }
+    canvas { position: absolute; top: 14.5%; left: 4.3%; width: 44%; height: 59%; }
+
+    #button-print { position: absolute; bottom: 18%; left: 2%; opacity: 0.25; background: white; height: 7%; width: 3%; }
+    #oscilloscope:hover #button-print { opacity: 1; background: none; border: 3px solid white;  }
+    #button-print:active { border: none !important; opacity: 0.5 !important; background: #333 !important; }
+  </style>
 </head>
 <body>
-  <h1>Lissajous</h1>
+  <section>
 
-  <canvas id="lissajous" width="500" height="500"></canvas>
+  <div id="oscilloscope">
+    <img src="oscilloscope.png" draggable="false">
+    <h1>Lissajous Machine v0.1</h1>
+    <canvas id="lissajous" width="500" height="300"></canvas>
+
+    <button id="button-print"></button>
+  </div>
+
+<textarea id="program">
+function x(t) { return Math.sin(t/3.02); };
+function y(t) { return Math.cos(t); }
+
+var para = ParametricQueue(x, y, 40);
+
+function loop() {
+  reset();
+  graph(para);
+  para.step(1);
+}
+
+window.loopInterval = setInterval(loop, 2);
+</textarea>
+</section>
+
+<section>
+ <p>
+   Oscilloscope image adapted from <a href="https://flic.kr/p/kLVcHw"><em>Tektronix MDO3000 Mixed Domain Oscilloscope Teardown</em></a> by Dave Jones.
+   <a rel="license" href="http://creativecommons.org/licenses/by/2.0/"><img alt="Creative Commons License" style="vertical-align: middle;" src="https://i.creativecommons.org/l/by/2.0/88x31.png"></a>
+ </p>
+</section>
+
 </body>
 </html>
