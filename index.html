@@ -23,9 +23,11 @@
            font: 16px bold "Times New Roman" serif; color: #3b2a61; font-style: italic; }
     canvas { position: absolute; top: 14.5%; left: 4.3%; width: 44%; height: 59%; }
 
-    #button-print { position: absolute; bottom: 18%; left: 2%; opacity: 0.25; background: white; height: 7%; width: 3%; }
-    #oscilloscope:hover #button-print { opacity: 1; background: none; border: 3px solid white;  }
-    #button-print:active { border: none !important; opacity: 0.5 !important; background: #333 !important; }
+    #oscilloscope button { position: absolute; opacity: 0.25; background: white; }
+    #oscilloscope:hover button { opacity: 1; background: none; border: 3px solid white; }
+    #oscilloscope button:active { border: none !important; opacity: 0.5 !important; background: #333 !important; }
+
+    #button-print { bottom: 18%; left: 2%; height: 7%; width: 3%; }
   </style>
 </head>
 <body>
@@ -36,6 +38,7 @@
     <h1>Lissajous Machine v0.1</h1>
     <canvas id="lissajous" width="500" height="300"></canvas>
     <canvas id="grid" width="500" height="300"></canvas>
+
     <button id="button-print"></button>
   </div>
 
