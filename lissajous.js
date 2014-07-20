@@ -12,12 +12,16 @@ var ParametricQueue = function(xt, yt, size) {
 
 window.onload=function(){
 
+  drawGrid();
+
+  //////////////////////////////////////////////////////
+
   var canvas = document.getElementById("lissajous");
   var ctx = canvas.getContext("2d");
 
   var width = canvas.width, height = canvas.height;
 
-  //ctx.fillStyle = "black";
+  ctx.fillStyle = "black";
   ctx.fillRect(0,0, width,height);
   ctx.strokeStyle = "limegreen";
 
@@ -60,12 +64,37 @@ window.onload=function(){
 
   updateLissajous.call(program);
 
-
-
-
   document.getElementById("button-print").onclick = function() {
     window.open(canvas.toDataURL());
   };
 
 
 };
+
+function drawGrid() {
+  var grid = document.getElementById("grid");
+  var grid_ctx = grid.getContext("2d");
+
+  grid_ctx.lineWidth = 1;
+  grid_ctx.strokeStyle = "darkgreen";
+
+  grid_ctx.beginPath();
+
+  var x_tics = 10, y_tics = 8;
+
+  var i;
+
+  for (i=0; i<x_tics; i++)
+  {
+    grid_ctx.moveTo(i*grid.width/x_tics, 0);
+    grid_ctx.lineTo(i*grid.width/x_tics, grid.height);
+  }
+
+  for (i=0; i<y_tics; i++)
+  {
+    grid_ctx.moveTo(0, i*grid.width/y_tics);
+    grid_ctx.lineTo(grid.width, i*grid.width/y_tics);
+  }
+
+  grid_ctx.stroke();
+}
