@@ -57,6 +57,9 @@ window.onload=function(){
     window.open(canvas.toDataURL());
   };
 
+  ////
+  new Knob(document.getElementById("knob-test"), new Ui.P5());
+
 };
 
 function drawGrid() {

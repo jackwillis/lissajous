@@ -27,8 +27,18 @@
     #oscilloscope:hover button { opacity: 1; background: none; border: 3px solid white; }
     #oscilloscope button:active { border: none !important; opacity: 0.5 !important; background: #333 !important; }
 
+    #oscilloscope input { position: absolute; border: 3px solid red; }
+
     #button-print { bottom: 18%; left: 2%; height: 7%; width: 3%; }
+    #knob-test { top: 14%; }
   </style>
+
+  <link rel="stylesheet" href="jim-knopf/lib/presets/p5.css">
+  <script src="jim-knopf/lib/ui/ui.js"></script>
+  <script src="jim-knopf/lib/ui/ui.el.js"></script>
+  <script src="jim-knopf/lib/knob.js"></script>
+  <script src="jim-knopf/lib/presets/p5.js"></script>
+
 </head>
 <body>
   <section>
@@ -40,6 +50,7 @@
     <canvas id="grid" width="500" height="300"></canvas>
 
     <button id="button-print"></button>
+    <input id="knob-test" type="range" min="1" max="31" data-width="50" data-height="50" data-angleOffset="220" data-angleRange="360">
   </div>
 
 <textarea id="program">
