@@ -47,3 +47,15 @@ var DataGrapher = function(canvas, xwindow, ywindow) {
 
   };
 };
+
+var ParametricQueue = function(xt, yt, size) {
+  var queue = FixedQueue(size);
+
+  queue.t = 0;
+  queue.step = function(tstep) {
+    this.push([ xt(this.t), yt(this.t) ]);
+    this.t += tstep;
+  };
+
+  return queue;
+};
