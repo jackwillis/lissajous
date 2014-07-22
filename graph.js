@@ -24,27 +24,32 @@ var DataGrapher = function(canvas, xwindow, ywindow) {
   var rescalex = rescale({ from: xwindow, to: [0, canvas.width] }),
       rescaley = rescale({ from: ywindow, to: [canvas.height, 0] });
 
+//  var grd;
+//  grd=ctx.createLinearGradient(0,0,170,0);
+//  grd.addColorStop(0,"black");
+//  grd.addColorStop(1,"limegreen");
+  //ctx.strokeStyle = grd;
+
   return function(points) {
 
     var graphx, graphy, canvasx, canvasy, i;
+
+    var d=new Date();
+
+    ctx.beginPath();
 
     for (i=0; i<points.length; i++)
     {
       graphx = points[i][0];
       graphy = points[i][1];
-
-      ctx.lineWidth = 5*i/points.length;
-
-      ctx.beginPath();
-      ctx.moveTo(canvasx, canvasy);
-
-      canvasx = rescalex(graphx);
-      canvasy = rescaley(graphy);
+      
+      canvasx = parseInt( rescalex(graphx) );
+      canvasy = parseInt( rescaley(graphy) );
 
       ctx.lineTo(canvasx, canvasy);
-      ctx.stroke();
     }
 
+    ctx.stroke();
   };
 };
 
