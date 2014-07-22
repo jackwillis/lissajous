@@ -51,14 +51,13 @@
 function x(t) { return Math.sin(t/3.02); };
 function y(t) { return Math.cos(t); }
 
-var para = ParametricQueue(x, y, 40);
+var para = ParametricQueue(x, y, 5);
 
 function loop() {
-  reset();
   graph(para);
   para.step(1);
 
-  requestAnimationFrame(loop);
+  window.loopRequest = requestAnimationFrame(loop);
 }
 
 loop();

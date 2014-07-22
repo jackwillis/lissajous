@@ -24,32 +24,72 @@ var DataGrapher = function(canvas, xwindow, ywindow) {
   var rescalex = rescale({ from: xwindow, to: [0, canvas.width] }),
       rescaley = rescale({ from: ywindow, to: [canvas.height, 0] });
 
-//  var grd;
-//  grd=ctx.createLinearGradient(0,0,170,0);
-//  grd.addColorStop(0,"black");
-//  grd.addColorStop(1,"limegreen");
-  //ctx.strokeStyle = grd;
+  ctx.fillStyle = "black";
+  var w = canvas.width, h = canvas.height;
 
-  return function(points) {
+  return {
 
-    var graphx, graphy, canvasx, canvasy, i;
+    oldRender: function(points) {
+      ctx.fillRect(0,0, w,h);
 
-    var d=new Date();
+      var graphx, graphy, canvasx, canvasy, i;
+      ctx.beginPath();
+      for (i=0; i<points.length; i++)
+      {
+        graphx = points[i][0];
+        graphy = points[i][1];
+        
+        canvasx = parseInt( rescalex(graphx) );
+        canvasy = parseInt( rescaley(graphy) );
+        ctx.lineTo(canvasx, canvasy);
+      }
+      ctx.stroke();
+    },
 
-    ctx.beginPath();
+    newRender: function(points) {
+      var graphx, graphy, canvasx, canvasy, i;
 
-    for (i=0; i<points.length; i++)
-    {
-      graphx = points[i][0];
-      graphy = points[i][1];
-      
+      if (!points[1]) return;
+
+      ctx.strokeStyle="black";
+      ctx.lineWidth=3;
+      ctx.beginPath();
+
+      graphx = points[0][0];
+      graphy = points[0][1];
       canvasx = parseInt( rescalex(graphx) );
       canvasy = parseInt( rescaley(graphy) );
+      ctx.moveTo(canvasx, canvasy);
 
+      graphx = points[1][0];
+      graphy = points[1][1];
+      canvasx = parseInt( rescalex(graphx) );
+      canvasy = parseInt( rescaley(graphy) );
       ctx.lineTo(canvasx, canvasy);
+
+      ctx.stroke();
+
+      ctx.strokeStyle="limegreen";
+      ctx.lineWidth=1;
+      ctx.beginPath();
+
+      graphx = points[points.length-2][0];
+      graphy = points[points.length-2][1];
+      canvasx = parseInt( rescalex(graphx) );
+      canvasy = parseInt( rescaley(graphy) );
+      ctx.moveTo(canvasx, canvasy);
+
+      graphx = points[points.length-1][0];
+      graphy = points[points.length-1][1];
+      canvasx = parseInt( rescalex(graphx) );
+      canvasy = parseInt( rescaley(graphy) );
+      ctx.lineTo(canvasx, canvasy);
+
+      ctx.stroke();
+
+      console.log(points.length);
     }
 
-    ctx.stroke();
   };
 };
 

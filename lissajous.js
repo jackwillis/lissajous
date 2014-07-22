@@ -16,15 +16,17 @@ window.onload=function(){
 
   function reset() { ctx.fillRect(0,0, width,height); }
 
-  var graph = DataGrapher(canvas, [-1.1, 1.1], [-1.1, 1.1]);
+  var graph = DataGrapher(canvas, [-1.1, 1.1], [-1.1, 1.1]).oldRender;
 
   //////////////////////////////////////////////////////////
 
   function updateLissajous() {
+    reset();
+
     if (this.value === this.oldValue) return;
     this.oldValue = this.value;
 
-    clearInterval(window.loopInterval);
+    cancelAnimationFrame(window.loopRequest);
     this.class = "flash";
 
     try
@@ -58,7 +60,6 @@ window.onload=function(){
   };
 
   ////
-  new Knob(document.getElementById("knob-test"), new Ui.P5());
 
 };
 
