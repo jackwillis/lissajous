@@ -33,12 +33,6 @@
     #knob-test { top: 14%; }
   </style>
 
-  <link rel="stylesheet" href="jim-knopf/lib/presets/p5.css">
-  <script src="jim-knopf/lib/ui/ui.js"></script>
-  <script src="jim-knopf/lib/ui/ui.el.js"></script>
-  <script src="jim-knopf/lib/knob.js"></script>
-  <script src="jim-knopf/lib/presets/p5.js"></script>
-
 </head>
 <body>
   <section>
@@ -63,9 +57,11 @@ function loop() {
   reset();
   graph(para);
   para.step(1);
+
+  requestAnimationFrame(loop);
 }
 
-window.loopInterval = setInterval(loop, 2);
+loop();
 </textarea>
 </section>
 
