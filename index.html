@@ -2,6 +2,13 @@
 <html>
 <head>
   <title>Lissajous Machine</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="knobs/Knob.js"></script>
+  <script src="knobs/demo/asset/ui.js"></script>
+
+  <link rel="stylesheet" rel="knobs/demo/asset/ui.css">
+
   <script src="fixedQueue.js"></script>
   <script src="graph.js"></script>
   <script src="lissajous.js"></script>
@@ -33,6 +40,78 @@
     #knob-test { top: 14%; }
   </style>
 
+<style type="text/css">
+
+    .ui-shadow {
+         -moz-box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+      -webkit-box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+              box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+    }
+
+    .ui-knob {
+      position: relative;
+      display:  inline-block;
+      overflow: visible;
+      width:  64px;
+      height: 64px;
+      padding: 0px;
+
+      border:1px solid #ddd;
+      border-radius:50px;
+
+      /* center the div */
+      top:50%;
+      left:50%;
+
+      border: 0px solid #ccc;
+      background: #eee;
+      font-weight: bold;
+      color: #444;
+      text-shadow: 0 1px 1px #f6f6f6;
+      background-image: -moz-linear-gradient(top, #fdfdfd, #dddddd);
+      background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #fdfdfd), color-stop(1, #dddddd));
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#dddddd')";
+    }
+
+    .ui-indicator {
+      position: absolute;
+      display: block;
+      z-index: 10;
+      margin: 0;
+      padding: 0;
+      border-radius:3px;
+      /* Due to a display bug with anti-aliasing */
+      -webkit-backface-visibility: hidden;
+
+      border: 1px solid #808080;
+      background: #fdfdfd;
+      font-weight: bold;
+      color: #111111;
+      text-shadow: 0 1px 1px  #ffffff;
+      background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+      background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #eeeeee), color-stop(1, #dddddd));
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#dddddd')";
+    }
+
+    .position.ui-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 8px;
+    }
+
+    .rotate.ui-indicator {
+      width: 64px;
+      height: 10px;
+    }
+
+    .position-rotate.ui-indicator {
+      width: 10px;
+      height: 6px;
+    }
+
+
+  </style>
+
 </head>
 <body>
   <section>
@@ -44,7 +123,20 @@
     <canvas id="grid" width="500" height="300"></canvas>
 
     <button id="button-print"></button>
-    <input id="knob-test" type="range" min="1" max="31" data-width="50" data-height="50" data-angleOffset="220" data-angleRange="360">
+    
+    <div style="position:relative;">
+    <input id="position-rotate"
+       name="rotate"
+       type="range"
+       value="50"
+       min="0" max="100"
+       data-angle-start="-400"
+       data-angle-end="360"
+       data-indicator-auto-position="true"
+       data-indicator-auto-rotate="true"
+       data-indicator-radius="22">
+    </div>
+
   </div>
 
 <textarea id="program">
